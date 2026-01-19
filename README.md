@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,7 +28,7 @@
 
         h1 {
             font-size: 2rem;
-            color: #111827;
+            color: #3463c7;
             text-align: center;
             margin-bottom: 0.5rem;
         }
