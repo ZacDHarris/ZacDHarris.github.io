@@ -224,6 +224,10 @@
 
         <form id="supportForm">
             <div class="form-grid">
+             <div class="form-group full-width">
+                <label for="agentInitials">Agent Initials</label>
+                <input type="text" id="agentInitials" placeholder="Enter agent initials">
+            </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
                     <input type="text" id="phone" placeholder="Enter phone">
@@ -337,11 +341,6 @@
             <div class="form-group full-width">
                 <label for="timeframeIssues">Timeframe When Issues Started</label>
                 <input type="text" id="timeframeIssues" placeholder="Enter timeframe when issues started">
-            </div>
-
-            <div class="form-group full-width">
-                <label for="agentInitials">Agent Initials</label>
-                <input type="text" id="agentInitials" placeholder="Enter agent initials">
             </div>
         </form>
 
