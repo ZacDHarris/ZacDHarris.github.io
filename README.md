@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -262,7 +262,7 @@
             
             <div class="form-group full-width">
                     <label for="ont">ONT Stats</label>
-                    <input type="text" id="ont" placeholder="Enter ONT Stats: SN, Alarm codes, Light Levels, and Head End/Hub">
+                    <textarea id="ont" placeholder="Enter ONT Stats: SN, Alarm codes, Light Levels, and Head End/Hub"></textarea>
                 </div>
             </div>
 
@@ -302,6 +302,7 @@
                         <button type="button" onclick="setYesNo('networkStable', false)">No</button>
                     </div>
                 </div>
+                
                        <div class="form-grid">
                 <div class="form-group">
                     <label>Is there Wi-Fi Channel Interference</label>
@@ -318,7 +319,6 @@
                         <button type="button" onclick="setYesNo('equipmentRebooted', false)">No</button>
                     </div>
                 </div>
-            </div>
 
             <div class="form-group full-width">
                 <label>Are All Connections Verified</label>
@@ -332,7 +332,7 @@
                 <label for="timeframeIssues">Timeframe When Issues Started</label>
                 <input type="text" id="timeframeIssues" placeholder="Enter timeframe when issues started">
             </div>
-        </form>
+            </form>
 
         <div class="action-buttons">
             <button class="btn btn-primary" onclick="generateNote()">Generate Note</button>
@@ -460,5 +460,5 @@ Timeframe When Issues Started: ${formData.timeframeIssues}`;
             document.getElementById('outputSection').classList.remove('show');
         }
     </script>
-</body>
-</html>
+    </body>
+    </html>
