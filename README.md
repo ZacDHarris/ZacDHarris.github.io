@@ -224,10 +224,12 @@
 
         <form id="supportForm">
             <div class="form-grid">
-             <div class="form-group full-width">
+            
+             <div class="form-group">
                 <label for="agentInitials">Agent Initials</label>
                 <input type="text" id="agentInitials" placeholder="Enter agent initials">
             </div>
+            
                 <div class="form-group">
                     <label for="phone">Phone</label>
                     <input type="text" id="phone" placeholder="Enter phone">
@@ -268,6 +270,11 @@
                 <label for="customerStatement">Customer Statement</label>
                 <textarea id="customerStatement" placeholder="Enter customer statement"></textarea>
             </div>
+            
+            <div class="form-group full-width">
+                <label for="agentStatement">Agent Statement</label>
+                <textarea id="agentStatement" placeholder="Enter YOUR statement"></textarea>
+            </div>
 
             <div class="form-group full-width">
                 <label for="alarmCodes">Alarm Code(s)</label>
@@ -289,7 +296,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Is Network Stable</label>
+                    <label>Is Network Online?</label>
                     <div class="yes-no-buttons">
                         <button type="button" onclick="setYesNo('networkStable', true)">Yes</button>
                         <button type="button" onclick="setYesNo('networkStable', false)">No</button>
@@ -391,43 +398,50 @@
 
         function generateNote() {
             const formData = {
-                phone: document.getElementById('phone').value,
+                agentInitials: document.getElementById('agentInitials').value,
+                accountNumber: document.getElementById('accountNumber').value,
                 name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
                 address: document.getElementById('address').value,
                 salesArea: document.getElementById('salesArea').value,
-                accountNumber: document.getElementById('accountNumber').value,
-                ont: document.getElementById('ont').value,
                 package: document.getElementById('package').value,
+                
                 customerStatement: document.getElementById('customerStatement').value,
+                agentStatement: document.getElementById('agentStatement').value,
+                
+                ont: document.getElementById('ont').value,
                 alarmCodes: document.getElementById('alarmCodes').value,
                 speedTest: document.getElementById('speedTest').value,
                 lightLevels: document.getElementById('lightLevels').value,
                 l2UserAligned: document.getElementById('l2UserAligned').value,
                 verifiedHeadEnd: document.getElementById('verifiedHeadEnd').value,
-                timeframeIssues: document.getElementById('timeframeIssues').value,
-                agentInitials: document.getElementById('agentInitials').value
+                timeframeIssues: document.getElementById('timeframeIssues').value
+                
             };
 
             const note = `Phone: ${formData.phone}
+Agent Initials: ${formData.agentInitials}
+Account #: ${formData.accountNumber}
 Name: ${formData.name}
 Address: ${formData.address}
 Sales Area: ${formData.salesArea}
-Account #: ${formData.accountNumber}
-ONT: ${formData.ont}
 Package: ${formData.package}
+
 Customer Statement: ${formData.customerStatement}
+Agent Statement: ${formData.agentStatement}
+
+ONT: ${formData.ont}
 Alarm Code(s): ${formData.alarmCodes}
 Speed Test (Down/Up): ${formData.speedTest}
-Are Devices Disconnecting: ${yesNoData.devicesDisconnecting === null ? '' : yesNoData.devicesDisconnecting ? 'Yes' : 'No'}
-Is Network Stable: ${yesNoData.networkStable === null ? '' : yesNoData.networkStable ? 'Yes' : 'No'}
+Device Connectivity Issues: ${yesNoData.devicesDisconnecting === null ? '' : yesNoData.devicesDisconnecting ? 'Yes' : 'No'}
+Is Network Online: ${yesNoData.networkStable === null ? '' : yesNoData.networkStable ? 'Yes' : 'No'}
 Light Levels (OLT/ONT): ${formData.lightLevels}
 L2-User Aligned (if applicable): ${formData.l2UserAligned}
 Verified Head End/Hub: ${formData.verifiedHeadEnd}
 Is there Wi-Fi Channel Interference: ${yesNoData.wifiInterference === null ? '' : yesNoData.wifiInterference ? 'Yes' : 'No'}
 Was Equipment Rebooted: ${yesNoData.equipmentRebooted === null ? '' : yesNoData.equipmentRebooted ? 'Yes' : 'No'}
 Are All Connections Verified: ${yesNoData.connectionsVerified === null ? '' : yesNoData.connectionsVerified ? 'Yes' : 'No'}
-Timeframe When Issues Started: ${formData.timeframeIssues}
-Agent Initials: ${formData.agentInitials}`;
+Timeframe When Issues Started: ${formData.timeframeIssues}`;
 
             document.getElementById('generatedNote').textContent = note;
             document.getElementById('outputSection').classList.add('show');
