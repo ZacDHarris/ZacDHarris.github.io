@@ -255,15 +255,15 @@
                     <input type="text" id="accountNumber" placeholder="Enter account #">
                 </div>
 
-                <div class="form-group">
-                    <label for="ont">ONT</label>
-                    <input type="text" id="ont" placeholder="Enter ONT">
-                </div>
-            </div>
-
-            <div class="form-group full-width">
+            <div class="form-group">
                 <label for="package">Package</label>
                 <input type="text" id="package" placeholder="Enter package">
+            </div>
+            
+            <div class="form-group full-width">
+                    <label for="ont">ONT Stats</label>
+                    <input type="text" id="ont" placeholder="Enter ONT Stats: SN, Alarm codes, Light Levels, and Head End/Hub">
+                </div>
             </div>
 
             <div class="form-group full-width">
@@ -277,13 +277,13 @@
             </div>
 
             <div class="form-group full-width">
-                <label for="alarmCodes">Alarm Code(s)</label>
-                <input type="text" id="alarmCodes" placeholder="Enter alarm code(s)">
-            </div>
-
-            <div class="form-group full-width">
                 <label for="speedTest">Speed Test (Down/Up)</label>
                 <input type="text" id="speedTest" placeholder="Enter speed test (Down/Up)">
+            </div>
+            
+               <div class="form-group full-width">
+                <label for="l2UserAligned">L2-User Aligned (if applicable)</label>
+                <input type="text" id="l2UserAligned" placeholder="Enter L2-User aligned (if applicable)">
             </div>
 
             <div class="form-grid">
@@ -302,24 +302,7 @@
                         <button type="button" onclick="setYesNo('networkStable', false)">No</button>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group full-width">
-                <label for="lightLevels">Light Levels (OLT/ONT)</label>
-                <input type="text" id="lightLevels" placeholder="Enter light levels (OLT/ONT)">
-            </div>
-
-            <div class="form-group full-width">
-                <label for="l2UserAligned">L2-User Aligned (if applicable)</label>
-                <input type="text" id="l2UserAligned" placeholder="Enter L2-User aligned (if applicable)">
-            </div>
-
-            <div class="form-group full-width">
-                <label for="verifiedHeadEnd">Verified Head End/Hub</label>
-                <input type="text" id="verifiedHeadEnd" placeholder="Enter verified head end/hub">
-            </div>
-
-            <div class="form-grid">
+                       <div class="form-grid">
                 <div class="form-group">
                     <label>Is there Wi-Fi Channel Interference</label>
                     <div class="yes-no-buttons">
@@ -410,11 +393,9 @@
                 agentStatement: document.getElementById('agentStatement').value,
                 
                 ont: document.getElementById('ont').value,
-                alarmCodes: document.getElementById('alarmCodes').value,
+                
                 speedTest: document.getElementById('speedTest').value,
-                lightLevels: document.getElementById('lightLevels').value,
                 l2UserAligned: document.getElementById('l2UserAligned').value,
-                verifiedHeadEnd: document.getElementById('verifiedHeadEnd').value,
                 timeframeIssues: document.getElementById('timeframeIssues').value
                 
             };
@@ -430,14 +411,12 @@ Package: ${formData.package}
 Customer Statement: ${formData.customerStatement}
 Agent Statement: ${formData.agentStatement}
 
-ONT: ${formData.ont}
-Alarm Code(s): ${formData.alarmCodes}
+ONT Stats: ${formData.ont}
+
 Speed Test (Down/Up): ${formData.speedTest}
 Device Connectivity Issues: ${yesNoData.devicesDisconnecting === null ? '' : yesNoData.devicesDisconnecting ? 'Yes' : 'No'}
 Is Network Online: ${yesNoData.networkStable === null ? '' : yesNoData.networkStable ? 'Yes' : 'No'}
-Light Levels (OLT/ONT): ${formData.lightLevels}
 L2-User Aligned (if applicable): ${formData.l2UserAligned}
-Verified Head End/Hub: ${formData.verifiedHeadEnd}
 Is there Wi-Fi Channel Interference: ${yesNoData.wifiInterference === null ? '' : yesNoData.wifiInterference ? 'Yes' : 'No'}
 Was Equipment Rebooted: ${yesNoData.equipmentRebooted === null ? '' : yesNoData.equipmentRebooted ? 'Yes' : 'No'}
 Are All Connections Verified: ${yesNoData.connectionsVerified === null ? '' : yesNoData.connectionsVerified ? 'Yes' : 'No'}
