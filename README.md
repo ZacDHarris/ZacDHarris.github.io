@@ -109,12 +109,12 @@
         }
 
         .yes-no-buttons button.active-yes {
-            background-color: #16a34a;
+            background-color: #FB612F;
             color: white;
         }
 
         .yes-no-buttons button.active-no {
-            background-color: #dc2626;
+            background-color: #D9D9D6;
             color: white;
         }
 
