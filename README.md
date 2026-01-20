@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -332,7 +332,7 @@
                 <label for="timeframeIssues">Timeframe When Issues Started</label>
                 <input type="text" id="timeframeIssues" placeholder="Enter timeframe when issues started">
             </div>
-            </form>
+        </form>
 
         <div class="action-buttons">
             <button class="btn btn-primary" onclick="generateNote()">Generate Note</button>
@@ -460,5 +460,5 @@ Timeframe When Issues Started: ${formData.timeframeIssues}`;
             document.getElementById('outputSection').classList.remove('show');
         }
     </script>
-    </body>
-    </html>
+ </body>
+</html>
