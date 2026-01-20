@@ -224,12 +224,11 @@
 
         <form id="supportForm">
             <div class="form-grid">
-            
-             <div class="form-group">
-                <label for="agentInitials">Agent Initials</label>
-                <input type="text" id="agentInitials" placeholder="Enter agent initials">
-            </div>
-            
+                <div class="form-group">
+                    <label for="agentInitials">Agent Initials</label>
+                    <input type="text" id="agentInitials" placeholder="Enter agent initials">
+                </div>
+                
                 <div class="form-group">
                     <label for="phone">Phone</label>
                     <input type="text" id="phone" placeholder="Enter phone">
@@ -255,38 +254,36 @@
                     <input type="text" id="accountNumber" placeholder="Enter account #">
                 </div>
 
-            <div class="form-group">
-                <label for="package">Package</label>
-                <input type="text" id="package" placeholder="Enter package">
-            </div>
-            
-            <div class="form-group full-width">
+                <div class="form-group">
+                    <label for="package">Package</label>
+                    <input type="text" id="package" placeholder="Enter package">
+                </div>
+                
+                <div class="form-group full-width">
                     <label for="ont">ONT Stats</label>
                     <textarea id="ont" placeholder="Enter ONT Stats: SN, Alarm codes, Light Levels, and Head End/Hub"></textarea>
                 </div>
-            </div>
 
-            <div class="form-group full-width">
-                <label for="customerStatement">Customer Statement</label>
-                <textarea id="customerStatement" placeholder="Enter customer statement"></textarea>
-            </div>
-            
-            <div class="form-group full-width">
-                <label for="agentStatement">Agent Statement</label>
-                <textarea id="agentStatement" placeholder="Enter YOUR statement"></textarea>
-            </div>
+                <div class="form-group full-width">
+                    <label for="customerStatement">Customer Statement</label>
+                    <textarea id="customerStatement" placeholder="Enter customer statement"></textarea>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="agentStatement">Agent Statement</label>
+                    <textarea id="agentStatement" placeholder="Enter YOUR statement"></textarea>
+                </div>
 
-            <div class="form-group full-width">
-                <label for="speedTest">Speed Test (Down/Up)</label>
-                <input type="text" id="speedTest" placeholder="Enter speed test (Down/Up)">
-            </div>
-            
-               <div class="form-group full-width">
-                <label for="l2UserAligned">L2-User Aligned (if applicable)</label>
-                <input type="text" id="l2UserAligned" placeholder="Enter L2-User aligned (if applicable)">
-            </div>
+                <div class="form-group full-width">
+                    <label for="speedTest">Speed Test (Down/Up)</label>
+                    <input type="text" id="speedTest" placeholder="Enter speed test (Down/Up)">
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="l2UserAligned">L2-User Aligned (if applicable)</label>
+                    <input type="text" id="l2UserAligned" placeholder="Enter L2-User aligned (if applicable)">
+                </div>
 
-            <div class="form-grid">
                 <div class="form-group">
                     <label>Are Devices Disconnecting</label>
                     <div class="yes-no-buttons">
@@ -303,7 +300,6 @@
                     </div>
                 </div>
                 
-                       <div class="form-grid">
                 <div class="form-group">
                     <label>Is there Wi-Fi Channel Interference</label>
                     <div class="yes-no-buttons">
@@ -320,17 +316,18 @@
                     </div>
                 </div>
 
-            <div class="form-group full-width">
-                <label>Are All Connections Verified</label>
-                <div class="yes-no-buttons">
-                    <button type="button" onclick="setYesNo('connectionsVerified', true)">Yes</button>
-                    <button type="button" onclick="setYesNo('connectionsVerified', false)">No</button>
+                <div class="form-group full-width">
+                    <label>Are All Connections Verified</label>
+                    <div class="yes-no-buttons">
+                        <button type="button" onclick="setYesNo('connectionsVerified', true)">Yes</button>
+                        <button type="button" onclick="setYesNo('connectionsVerified', false)">No</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group full-width">
-                <label for="timeframeIssues">Timeframe When Issues Started</label>
-                <input type="text" id="timeframeIssues" placeholder="Enter timeframe when issues started">
+                <div class="form-group full-width">
+                    <label for="timeframeIssues">Timeframe When Issues Started</label>
+                    <input type="text" id="timeframeIssues" placeholder="Enter timeframe when issues started">
+                </div>
             </div>
         </form>
 
@@ -388,16 +385,12 @@
                 address: document.getElementById('address').value,
                 salesArea: document.getElementById('salesArea').value,
                 package: document.getElementById('package').value,
-                
                 customerStatement: document.getElementById('customerStatement').value,
                 agentStatement: document.getElementById('agentStatement').value,
-                
                 ont: document.getElementById('ont').value,
-                
                 speedTest: document.getElementById('speedTest').value,
                 l2UserAligned: document.getElementById('l2UserAligned').value,
                 timeframeIssues: document.getElementById('timeframeIssues').value
-                
             };
 
             const note = `Phone: ${formData.phone}
@@ -460,5 +453,5 @@ Timeframe When Issues Started: ${formData.timeframeIssues}`;
             document.getElementById('outputSection').classList.remove('show');
         }
     </script>
- </body>
+</body>
 </html>
