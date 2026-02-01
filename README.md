@@ -118,6 +118,36 @@
             color: white;
         }
 
+        .troubleshooting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .troubleshooting-item {
+            padding: 0.75rem;
+            border: 2px solid #d1d5db;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background-color: white;
+            font-size: 0.875rem;
+            text-align: left;
+            user-select: none;
+        }
+
+        .troubleshooting-item:hover {
+            background-color: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .troubleshooting-item.selected {
+            background-color: #dbeafe;
+            border-color: #3b82f6;
+            color: #1e40af;
+        }
+
         .action-buttons {
             margin-top: 2rem;
             padding-top: 2rem;
@@ -258,11 +288,6 @@
                     <label for="package">Package</label>
                     <input type="text" id="package" placeholder="Enter package">
                 </div>
-                
-                <div class="form-group full-width">
-                    <label for="ont">ONT Stats</label>
-                    <textarea id="ont" placeholder="Enter ONT Stats: SN, Alarm codes, Light Levels, and Head End/Hub"></textarea>
-                </div>
 
                 <div class="form-group full-width">
                     <label for="customerStatement">Customer Statement</label>
@@ -275,13 +300,8 @@
                 </div>
 
                 <div class="form-group full-width">
-                    <label for="speedTest">Speed Test (Down/Up)</label>
-                    <input type="text" id="speedTest" placeholder="Enter speed test (Down/Up)">
-                </div>
-                
-                <div class="form-group full-width">
-                    <label for="l2UserAligned">L2-User Aligned (if applicable)</label>
-                    <input type="text" id="l2UserAligned" placeholder="Enter L2-User aligned (if applicable)">
+                    <label>Troubleshooting Steps (Optional - Click to Select)</label>
+                    <div class="troubleshooting-grid" id="troubleshootingGrid"></div>
                 </div>
 
                 <div class="form-group">
@@ -323,6 +343,21 @@
                         <button type="button" onclick="setYesNo('connectionsVerified', false)">No</button>
                     </div>
                 </div>
+                
+                <div class="form-group full-width">
+                    <label for="ont">ONT Stats</label>
+                    <textarea id="ont" placeholder="Enter ONT Stats: SN, Alarm codes, Light Levels, and Head End/Hub"></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="speedTest">Speed Test (Down/Up)</label>
+                    <input type="text" id="speedTest" placeholder="Enter speed test (Down/Up)">
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="l2UserAligned">L2-User Aligned (if applicable)</label>
+                    <input type="text" id="l2UserAligned" placeholder="Enter L2-User aligned (if applicable)">
+                </div>
 
                 <div class="form-group full-width">
                     <label for="timeframeIssues">Timeframe When Issues Started</label>
@@ -360,6 +395,59 @@
             connectionsVerified: null
         };
 
+        // Troubleshooting steps options
+        const troubleshootingOptions = [
+            "•Power Cycled Modem",
+            "•Defaulted Modem",
+            "•Reprovisioned Modem",
+            "•Reboot Modem",
+            "•Modem mode changed to ROUTED",
+            "•Modem mode changed to BRIDGED",
+            "•Activated OLT Bridge",
+            "•Flushed Bridge",
+            "•Bounce WAN Port",
+            "•Checked Fiber Patch Cable",
+            "•Ascending Bip8Errors",
+            "•No Construction Confirmed",
+            "•Construction Confirmed",
+            "•Factory Reset Modem",
+            "•Cleared Counters",
+            "•Checked Cx Power",
+            "•Power Cycled Router",
+            "•Firmware Update",
+            "•Swapped gateway router",
+            "•Temporarily Disable 5GHz",
+            "•Enabled Guest SSID",
+            "•Disabled IPv6",
+            "•Factory Reset Routers",
+            "•Optimization on Network"
+        ];
+
+        // Store selected troubleshooting steps
+        const selectedTroubleshooting = new Set();
+
+        // Initialize troubleshooting grid
+        function initTroubleshootingGrid() {
+            const grid = document.getElementById('troubleshootingGrid');
+            troubleshootingOptions.forEach(option => {
+                const item = document.createElement('div');
+                item.className = 'troubleshooting-item';
+                item.textContent = option;
+                item.onclick = () => toggleTroubleshooting(option, item);
+                grid.appendChild(item);
+            });
+        }
+
+        function toggleTroubleshooting(option, element) {
+            if (selectedTroubleshooting.has(option)) {
+                selectedTroubleshooting.delete(option);
+                element.classList.remove('selected');
+            } else {
+                selectedTroubleshooting.add(option);
+                element.classList.add('selected');
+            }
+        }
+
         function setYesNo(field, value) {
             yesNoData[field] = value;
             
@@ -393,6 +481,13 @@
                 timeframeIssues: document.getElementById('timeframeIssues').value
             };
 
+            // Build troubleshooting steps section
+            let troubleshootingSection = '';
+            if (selectedTroubleshooting.size > 0) {
+                troubleshootingSection = '\nTroubleshooting Steps:\n' + 
+                    Array.from(selectedTroubleshooting).join('\n');
+            }
+
             const note = `Phone: ${formData.phone}
 Agent Initials: ${formData.agentInitials}
 Account #: ${formData.accountNumber}
@@ -402,17 +497,20 @@ Sales Area: ${formData.salesArea}
 Package: ${formData.package}
 
 Customer Statement: ${formData.customerStatement}
+
 Agent Statement: ${formData.agentStatement}
+${troubleshootingSection}
+
+Device Connectivity Issues: ${yesNoData.devicesDisconnecting === null ? '' : yesNoData.devicesDisconnecting ? 'Yes' : 'No'}
+Is Network Online: ${yesNoData.networkStable === null ? '' : yesNoData.networkStable ? 'Yes' : 'No'}
+Is there Wi-Fi Channel Interference: ${yesNoData.wifiInterference === null ? '' : yesNoData.wifiInterference ? 'Yes' : 'No'}
+Was Equipment Rebooted: ${yesNoData.equipmentRebooted === null ? '' : yesNoData.equipmentRebooted ? 'Yes' : 'No'}
+Are All Connections Verified: ${yesNoData.connectionsVerified === null ? '' : yesNoData.connectionsVerified ? 'Yes' : 'No'}
 
 ONT Stats: ${formData.ont}
 
 Speed Test (Down/Up): ${formData.speedTest}
-Device Connectivity Issues: ${yesNoData.devicesDisconnecting === null ? '' : yesNoData.devicesDisconnecting ? 'Yes' : 'No'}
-Is Network Online: ${yesNoData.networkStable === null ? '' : yesNoData.networkStable ? 'Yes' : 'No'}
 L2-User Aligned (if applicable): ${formData.l2UserAligned}
-Is there Wi-Fi Channel Interference: ${yesNoData.wifiInterference === null ? '' : yesNoData.wifiInterference ? 'Yes' : 'No'}
-Was Equipment Rebooted: ${yesNoData.equipmentRebooted === null ? '' : yesNoData.equipmentRebooted ? 'Yes' : 'No'}
-Are All Connections Verified: ${yesNoData.connectionsVerified === null ? '' : yesNoData.connectionsVerified ? 'Yes' : 'No'}
 Timeframe When Issues Started: ${formData.timeframeIssues}`;
 
             document.getElementById('generatedNote').textContent = note;
@@ -448,10 +546,19 @@ Timeframe When Issues Started: ${formData.timeframeIssues}`;
             document.querySelectorAll('.yes-no-buttons button').forEach(btn => {
                 btn.classList.remove('active-yes', 'active-no');
             });
+
+            // Reset troubleshooting selections
+            selectedTroubleshooting.clear();
+            document.querySelectorAll('.troubleshooting-item').forEach(item => {
+                item.classList.remove('selected');
+            });
             
             // Hide output section
             document.getElementById('outputSection').classList.remove('show');
         }
+
+        // Initialize the troubleshooting grid on page load
+        initTroubleshootingGrid();
     </script>
 </body>
 </html>
